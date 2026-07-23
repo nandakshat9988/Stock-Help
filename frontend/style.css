@@ -300,3 +300,41 @@ nav{
 }
 
 }
+
+.summary-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+
+}
+
+.summary-table td{
+
+    padding:18px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    font-size:18px;
+
+}
+
+.summary-table td:first-child{
+
+    color:#94a3b8;
+
+    font-weight:600;
+
+}
+
+.summary-table td:last-child{
+
+    text-align:right;
+
+    font-weight:bold;
+
+    color:#38bdf8;
+
+}

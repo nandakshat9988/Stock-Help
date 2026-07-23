@@ -58,15 +58,14 @@ async function predictStock(symbol) {
 
     console.log(data);
 
-    // Current Price
     document.getElementById("currentPrice").innerHTML =
         "$" + data.currentPrice;
 
-    // Predicted Price
+   
     document.getElementById("predictedPrice").innerHTML =
         "$" + data.predictedPrice;
 
-    // Growth %
+    
     let growth =
         ((data.predictedPrice - data.currentPrice) /
         data.currentPrice) * 100;
@@ -74,28 +73,108 @@ async function predictStock(symbol) {
     document.getElementById("growth").innerHTML =
         growth.toFixed(2) + "%";
 
-    // Recommendation
+    
 
     let recommendation = "";
 
     if (growth > 1) {
-
         recommendation = "🟢 BUY";
-
     }
     else if (growth < -1) {
-
         recommendation = "🔴 SELL";
-
     }
     else {
-
         recommendation = "🟡 HOLD";
-
     }
 
     document.getElementById("recommendation").innerHTML =
         recommendation;
+    document.getElementById("summaryCurrent").innerHTML =
+    "$"+data.currentPrice;
+
+    document.getElementById("summaryPrediction").innerHTML =
+    "$"+data.predictedPrice;
+
+    document.getElementById("summaryGrowth").innerHTML =
+    growth.toFixed(2)+"%";
+
+    document.getElementById("summaryRecommendation").innerHTML =
+    recommendation;
+
+    const history = data.history;
+
+const labels = [];
+
+for(let i=1;i<=history.length;i++){
+
+    labels.push(i);
+
+}
+
+const ctx = document.getElementById("stockChart");
+
+new Chart(ctx,{
+
+    type:"line",
+
+    data:{
+
+        labels:labels,
+
+        datasets:[{
+
+            label:"Closing Price",
+
+            data:history,
+
+            borderColor:"#38bdf8",
+
+            backgroundColor:"rgba(56,189,248,.15)",
+
+            fill:true,
+
+            borderWidth:3,
+
+            tension:.4
+
+        }]
+
+    },
+
+    options:{
+
+        responsive:true,
+
+        plugins:{
+
+            legend:{
+                labels:{
+                    color:"white"
+                }
+            }
+
+        },
+
+        scales:{
+
+            x:{
+                ticks:{
+                    color:"white"
+                }
+            },
+
+            y:{
+                ticks:{
+                    color:"white"
+                }
+            }
+
+        }
+
+    }
+
+});
+    
 }
 async function init() {
     await loadStock();

@@ -36,14 +36,18 @@ def predict():
     next_day = [[len(df)]]
 
     prediction = model.predict(next_day)[0]
+    history = df["Close"].tolist()
 
     current_price = float(df["Close"].iloc[-1])
 
     return jsonify({
-        "symbol": symbol,
-        "currentPrice": round(current_price, 2),
-        "predictedPrice": round(float(prediction), 2)
-    })
+
+    "symbol":symbol,
+    "currentPrice":round(current_price,2),
+    "predictedPrice":round(float(prediction),2),
+    "history":history
+
+})
 
 
 if __name__ == "__main__":
