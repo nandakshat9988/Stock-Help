@@ -1,29 +1,14 @@
-async function selectStock() {
+function selectStock() {
+    const stock = document.getElementById("stockInput").value;
 
-    let stock = document.getElementById("stockInput").value;
-    const apiKey = "d9h0m51r01qmrn76d0c0d9h0m51r01qmrn76d0cg";
-    if(stock === ""){
+    if (stock === "") {
         alert("Please select a stock");
         return;
     }
-    try {
 
-        const response = await fetch(
-            `https://finnhub.io/api/v1/stock/profile2?symbol=${stock}&token=${apiKey}`
-        );
-        const data = await response.json();
-        document.getElementById("result").innerHTML = `
-            <h3>${data.name}</h3>
-            <p><strong>Symbol:</strong> ${data.ticker}</p>
-            <p><strong>Country:</strong> ${data.country}</p>
-            <p><strong>Exchange:</strong> ${data.exchange}</p>
-            <p><strong>Industry:</strong> ${data.finnhubIndustry}</p>
-            <p><strong>IPO Date:</strong> ${data.ipo}</p>
-            <img src="${data.logo}" width="100">
-        `;
-    } catch(error) {
-        console.log(error);
-    }
+    localStorage.setItem("stock", stock);
+
+    window.location.href = "stock.html";
 }
 
 
