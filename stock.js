@@ -34,4 +34,39 @@ async function loadStock() {
 
 }
 
-loadStock();
+async function predictStock(symbol) {
+    console.log("request sending");
+
+    const response = await fetch("http://127.0.0.1:5000/predict", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            symbol: symbol
+        })
+
+    });
+    console.log("request sent");
+
+    const data = await response.json();
+    console.log(data);
+
+    document.getElementById("prediction").innerHTML = `
+        <h2>Prediction</h2>
+
+        <p>Current Price : $${data.currentPrice}</p>
+
+        <p>Tomorrow Prediction : $${data.predictedPrice}</p>
+    `;
+    
+}
+async function init() {
+    await loadStock();
+    await predictStock(stock);
+}
+
+init();
