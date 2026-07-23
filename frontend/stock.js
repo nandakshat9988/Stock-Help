@@ -35,6 +35,7 @@ async function loadStock() {
 }
 
 async function predictStock(symbol) {
+
     console.log("request sending");
 
     const response = await fetch("http://127.0.0.1:5000/predict", {
@@ -50,19 +51,51 @@ async function predictStock(symbol) {
         })
 
     });
+
     console.log("request sent");
 
     const data = await response.json();
+
     console.log(data);
 
-    document.getElementById("prediction").innerHTML = `
-        <h2>Prediction</h2>
+    // Current Price
+    document.getElementById("currentPrice").innerHTML =
+        "$" + data.currentPrice;
 
-        <p>Current Price : $${data.currentPrice}</p>
+    // Predicted Price
+    document.getElementById("predictedPrice").innerHTML =
+        "$" + data.predictedPrice;
 
-        <p>Tomorrow Prediction : $${data.predictedPrice}</p>
-    `;
-    
+    // Growth %
+    let growth =
+        ((data.predictedPrice - data.currentPrice) /
+        data.currentPrice) * 100;
+
+    document.getElementById("growth").innerHTML =
+        growth.toFixed(2) + "%";
+
+    // Recommendation
+
+    let recommendation = "";
+
+    if (growth > 1) {
+
+        recommendation = "🟢 BUY";
+
+    }
+    else if (growth < -1) {
+
+        recommendation = "🔴 SELL";
+
+    }
+    else {
+
+        recommendation = "🟡 HOLD";
+
+    }
+
+    document.getElementById("recommendation").innerHTML =
+        recommendation;
 }
 async function init() {
     await loadStock();

@@ -1,33 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Stock Details</title>
-    <link rel="stylesheet" href="style.css">
+
+    <meta charset="UTF-8">
+    <title>Stock Dashboard</title>
+
+    <link rel="stylesheet" href="stock.css">
+
 </head>
 
 <body>
 
-<div class="container">
+<div class="dashboard">
 
-    <h1>Stock Details</h1>
+    <header>
 
-    <div id="companyInfo"></div>
+        <button onclick="window.location.href='index.html'" class="back-btn">
+            ← Back
+        </button>
 
-    <br>
+        <h1>Stock Prediction Dashboard</h1>
 
-    <button onclick="window.location.href='index.html'">
-        Back
-    </button>
-    <div id="companyInfo"></div>
+    </header>
 
-<hr>
+    <!-- Company Card -->
 
-<div id="prediction"></div>
+    <div class="company-card">
 
-<script src="stock.js"></script>
+        <div id="companyInfo"></div>
+
+    </div>
+
+    <!-- Prediction Cards -->
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h3>Current Price</h3>
+
+            <p id="currentPrice">--</p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Tomorrow Prediction</h3>
+
+            <p id="predictedPrice">--</p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Growth</h3>
+
+            <p id="growth">--</p>
+
+        </div>
+
+    </div>
+
+    <!-- Recommendation -->
+
+    <div class="recommendation">
+
+        <h2>Recommendation</h2>
+
+        <h1 id="recommendation">--</h1>
+
+    </div>
+
+    <!-- Prediction Summary -->
+
+    <div class="prediction-box">
+
+        <h2>Prediction Summary</h2>
+
+        <div id="prediction"></div>
+
+    </div>
+
+    <!-- Chart -->
+
+    <div class="chart-box">
+
+        <h2>Price History</h2>
+
+        <canvas id="stockChart"></canvas>
+
+    </div>
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="stock.js"></script>
 
 </body>
+
 </html>
